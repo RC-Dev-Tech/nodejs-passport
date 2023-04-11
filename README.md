@@ -20,15 +20,16 @@
 ## 簡介
 Passport 是一個 Node.js 的身份驗證中間件，可以快速且簡單地為應用程式添加身份驗證功能。<br>
 它支持多種身份驗證策略，包括本地驗證、OAuth、OpenID 等，同時也支持自定義身份驗證策略。<br>
-> 這次的實作，我們會搭配passport-local進行本地驗證來進行實作.
+> 這次的實作，我們會搭配passport-local進行本地驗證來進行.
 <br>
 
-使用Passport的簡易流程:<br>
+***使用Passport的簡易流程:***<br>
 當使用passport.authenticate()進行第一次驗證的時候，<br>
 則會跑到passport.use(new LocalStrategy((username, password, done)方法進行驗證. <br>
-根據驗證的結果決定要怎麼使用Done.<br>
-- 成功 - done(null, user); 將user這個資料傳下去.
-- 失敗 - done(null, false, { error_message}); 第二個欄位設定false並且回傳錯誤訊息.
+根據驗證的結果決定要怎麼使用Done來回傳結果.<br>
+- 成功 - done(null, user); 將user這個資料傳下去.<br>
+- 失敗 - done(null, false, { error_message}); 第二個欄位設定false並且回傳錯誤訊息. <br>
+
 當第一次驗證成功後，則會跑到 passport.serializeUser((user:User, done) 將資料存在session中.<br>
 當第二次驗證成功後，則會跑到 passport.deserializeUser((id, done) 將存在session中的資料直接拿出來使用.<br>
 最後再回到 passport.authenticate() 根據其設定的failureRedirect來導向失敗的網頁，或著成功的網頁. <br>
